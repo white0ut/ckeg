@@ -1,6 +1,6 @@
 import * as firebase from 'firebase'
-import sectionModel from './models/section'
-import todoModel from './models/todo'
+import sectionModel from 'models/section'
+import todoModel from 'models/todo'
 
 let database
 export const init = () => {
@@ -20,17 +20,18 @@ export const getSectionsDB = () => {
   return database.ref('/').once('value')
 }
 
-// get specified section
-export const getTodoDB = (sectionId) => {
-  return database.ref(`/${sectionId}`).once('value')
-}
-
 // add new section
 export const addSection = (name) => {
+  console.log("adding: " + name)
   let key = database.ref('/').push().key
   let model = sectionModel(key, name, 
     firebase.database.ServerValue.TIMESTAMP)
   return database.ref('/' + key).set(model)
+}
+
+// get specified section
+export const getTodoDB = (sectionId) => {
+  return database.ref(`/${sectionId}`).once('value')
 }
 
 // add new todo item into specified section
