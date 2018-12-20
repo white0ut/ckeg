@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {init as firebaseInit} from './firebase'
+import {init as firebaseInit} from '../firebase'
 import {browserHistory} from 'react-router'
 import Routes from './routes'
 import {Provider} from 'react-redux'
