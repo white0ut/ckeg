@@ -1,5 +1,12 @@
-import { getSectionsDB, addSection } from 'util/firebase'
+import { getSectionsDB, addSection, addTodoItem } from 'util/firebase'
 import actionType from 'constants'
+import {push} from 'react-router-redux'
+
+export const loadSpecificSection = (sectionId) => {
+  return (dispatch) => {
+    dispatch(push(`/${sectionId}`))
+  }
+}
 
 export const loadSections = () => {
   return dispatch => {
@@ -41,3 +48,25 @@ export const loadSections = () => {
     })
   }
  }
+
+ export const createTodoItem = (sectionId, name) => {
+  return (dispatch) => {
+    dispatch({
+      type: actionType.CREATE_TODO_REQUEST
+    })
+    addTodoItem(sectionId, name)
+      .then(res => {
+        loadSections()(dispatch)
+        dispatch({
+          type: actionType.CREATE_TODO_SUCCESS,
+          payload: res
+        })
+      })
+      .catch(error => {
+        dispatch({
+          type: actionType.CREATE_TODO_FAILED,
+          payload: error
+        })
+      })
+   }
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SectionList from './section-list'
 import {connect} from 'react-redux'
-import {loadSections, createSection} from 'actions/todo'
+import {loadSections, createSection, loadSpecificSection} from 'actions/todo'
 import {addSection} from 'util/firebase'
 
 class App extends Component {
@@ -18,10 +18,15 @@ class App extends Component {
     ref.value = ''
   }
 
+  onSectionClick = (sectionId) => {
+    this.props.loadSpecificSection(sectionId)
+  }
+
   render() {
     return (
       <div>
-        <SectionList sections={this.props.sections}/>
+        <SectionList sections={this.props.sections} 
+          onClick={this.onSectionClick}/>
         <form onSubmit={this.onSubmit}>
           <input ref="section-name"/>
           <button>Add new section</button>
@@ -35,4 +40,4 @@ const mapStateToProps = (state) => {
     sections: state.todo.sections
   }
 }
-export default connect(mapStateToProps, {loadSections, addSection, createSection})(App)
+export default connect(mapStateToProps, {loadSections, addSection, createSection, loadSpecificSection})(App)

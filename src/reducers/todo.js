@@ -4,6 +4,7 @@ import actionType from 'constants'
 let initialState = {
   sections: []
 }
+
 export default (state = initialState, action) => {
   let newState = _.merge({}, state)
   switch(action.type) {
@@ -13,4 +14,8 @@ export default (state = initialState, action) => {
     default:
       return state
   }
+}
+
+export const getSectionById = (state, sectionId) => {
+  return state.sections[sectionId] || {}
 }
