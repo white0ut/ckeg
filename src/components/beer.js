@@ -11,6 +11,7 @@ import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import moment from 'moment';
 
 const styles = theme => ({
     card: {
@@ -55,14 +56,14 @@ class Beer extends Component {
                     <Card className={classes.card}>
                         <CardHeader
                             title={props.beer.fields.name}
-                            subheader="Kegged on November 14, 2018"
+                            subheader={props.beer.fields.type}
                         />
                         <CardMedia style={{ height: 0, paddingTop: '56.25%' }}
                             image={imageURL}
                         />
                         <CardContent>
-                            <Typography variant="subheading" style={{ marginBottom: 14 }} gutterBottom align="center">
-                                {props.beer.fields.type}
+                            <Typography variant="caption" style={{ marginBottom: 14 }} gutterBottom align="center">
+                                {"Brewed " + moment(props.beer.fields.brewDate).format("MMMM Do, YYYY")}
                             </Typography>
                             <Typography style={{ marginBottom: 20 }} component="p" align="center">
                                 {props.beer.fields.shortDescription}
