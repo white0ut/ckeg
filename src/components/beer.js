@@ -4,7 +4,6 @@ import CardActions from '@material-ui/core/CardActions';
 import { withStyles } from '@material-ui/core/styles';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import classnames from 'classnames';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -12,22 +11,13 @@ import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
 
 const styles = theme => ({
     card: {
         minWidth: 275,
     },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-    },
     title: {
         fontSize: 14,
-    },
-    pos: {
-        marginBottom: 12,
     },
     expand: {
         transform: 'rotate(0deg)',
@@ -71,8 +61,18 @@ class Beer extends Component {
                             image={imageURL}
                         />
                         <CardContent>
-                            <Typography component="p">
+                            <Typography variant="subheading" style={{ marginBottom: 14 }} gutterBottom align="center">
+                                {props.beer.fields.type}
+                            </Typography>
+                            <Typography style={{ marginBottom: 20 }} component="p" align="center">
                                 {props.beer.fields.shortDescription}
+                            </Typography>
+                            <Typography className={classes.pos} color="textSecondary">
+                                ABV: <b>{props.beer.fields.abv}</b>
+                            </Typography>
+
+                            <Typography className={classes.pos} color="textSecondary">
+                                IBU: <b>{props.beer.fields.ibu}</b>
                             </Typography>
                         </CardContent>
                         <CardActions className={classes.actions} disableActionSpacing>
