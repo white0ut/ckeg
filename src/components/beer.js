@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import moment from 'moment';
+import Markdown from 'react-markdown'
 
 const styles = theme => ({
     card: {
@@ -94,7 +95,7 @@ class Beer extends Component {
                         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                           <CardContent>
                             <Typography paragraph>
-                              {props.beer.fields.longDescription}
+                              <Markdown source={props.beer.fields.longDescription} />
                             </Typography>
                           </CardContent>
                         </Collapse>
